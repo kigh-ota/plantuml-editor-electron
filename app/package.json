@@ -8,6 +8,7 @@
     "email": "ota.kaiichiro@gmail.com"
   },
   "dependencies": {
+    "node-plantuml": "^0.7.0",
     "sqlite3": "^4.0.2"
   }
 }

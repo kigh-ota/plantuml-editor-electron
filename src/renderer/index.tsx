@@ -11,7 +11,7 @@ document.addEventListener('drop', (event) => event.preventDefault());
 const container = document.getElementById('contents');
 ReactDom.render(
     <div>
-        <Title title="ts-electron" />
+        <Title title="plantuml-editor-electron" />
         <Button label="BUTTON"/>
         <DropArea />
     </div>,

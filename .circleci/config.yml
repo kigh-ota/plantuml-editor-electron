@@ -3,7 +3,7 @@ jobs:
   build-and-unit-test:
     docker:
       - image: circleci/node:8-browsers
-    working_directory: ~/ts-electron
+    working_directory: ~/plantuml-editor-electron
     steps:
       - checkout
       - run:
@@ -25,13 +25,13 @@ jobs:
           name: Run CLI tests
           command: npm run test:cli
       - store_test_results:
-          path: ~/ts-electron/junit
+          path: ~/plantuml-editor-electron/junit
       - store_artifacts:
-          path: ~/ts-electron/junit
+          path: ~/plantuml-editor-electron/junit
   package-and-integration-test:
     docker:
       - image: circleci/node:8-browsers
-    working_directory: ~/ts-electron
+    working_directory: ~/plantuml-editor-electron
     steps:
       - checkout
       - run:
@@ -50,11 +50,11 @@ jobs:
           name: Run integration tests
           command: MOCHA_FILE="junit/integration-test-results.xml" npm run test:integration:ci
       - store_test_results:
-          path: ~/ts-electron/junit
+          path: ~/plantuml-editor-electron/junit
       - store_artifacts:
-          path: ~/ts-electron/junit
+          path: ~/plantuml-editor-electron/junit
       - store_artifacts:
-          path: ~/ts-electron/dist
+          path: ~/plantuml-editor-electron/dist
 
 workflows:
   version: 2

@@ -6,7 +6,7 @@ async function initialize(): Promise<Instances> {
     if (!dataDir) {
         throw new Error('NODE_DATADIR is undefined');
     }
-    const dbPath = path.join(dataDir, 'ts-electron.db');
+    const dbPath = path.join(dataDir, 'plantuml-editor-electron.db');
     return await Initializer.initialize(dbPath);
 }
 

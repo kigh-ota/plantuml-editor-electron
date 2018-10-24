@@ -16,7 +16,7 @@ app.on('window-all-closed', () => {
 });
 
 async function initialize() {
-    const dbPath = path.join(app.getPath('documents'), 'ts-electron.db');
+    const dbPath = path.join(app.getPath('documents'), 'plantuml-editor-electron.db');
     const instances = await Initializer.initialize(dbPath);
 
     const ipcController = new IpcController(instances.sampleService);
@@ -38,3 +38,8 @@ function createWindow() {
         win = null;
     });
 }
+
+import plantuml from 'node-plantuml';
+import fs from 'fs';
+const gen = plantuml.generate('input-file');
+gen.out.pipe(fs.createWriteStream('output-file.png'));

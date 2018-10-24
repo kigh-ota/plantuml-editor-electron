@@ -10,7 +10,7 @@ describe('SampleRepositoryImpl', () => {
     let sut: SampleRepositoryImpl;
 
     function initTestDatabase(): Database {
-        const dbPath = path.join(os.tmpdir(), 'ts-electron-test.db');
+        const dbPath = path.join(os.tmpdir(), 'plantuml-editor-electron-test.db');
         if (fs.existsSync(dbPath)) {
             fs.unlinkSync(dbPath);
         }

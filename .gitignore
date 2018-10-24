@@ -7,4 +7,4 @@ npm-debug.log
 coverage/
 /cli.js
 /cli.js.map
-**/ts-electron.db
+**/plantuml-editor-electron.db
