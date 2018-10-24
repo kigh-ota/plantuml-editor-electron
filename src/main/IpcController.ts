@@ -1,4 +1,5 @@
 import FileReader from '../core/FileReader';
+import PlantUmlExecutor from '../core/PlantUmlExecutor';
 import SampleService from '../core/sample/SampleService';
 
 export default class IpcController {
@@ -14,5 +15,9 @@ export default class IpcController {
 
     public readFile(filePath: string): Promise<string> {
         return new FileReader().read(filePath);
+    }
+
+    public executePlantUml(src: string): Promise<any[]> {
+        return new PlantUmlExecutor().execute(src);
     }
 }

@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import Button from './Button';
 import DropArea from './DropArea';
 import Title from './Title';
+import PreviewImage from './PreviewImage';
 
 // Disable drag & drop
 document.addEventListener('dragover', (event) => event.preventDefault());
@@ -14,6 +15,7 @@ ReactDom.render(
         <Title title="plantuml-editor-electron" />
         <Button label="BUTTON"/>
         <DropArea />
+        <PreviewImage />
     </div>,
     container,
 );

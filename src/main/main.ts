@@ -1,7 +1,7 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
 import Initializer from '../core/Initializer';
-import { ADD_SAMPLE_VALUE_AND_GET_COUNT, READ_FILE, registerIpc } from '../ipc';
+import { ADD_SAMPLE_VALUE_AND_GET_COUNT, READ_FILE, registerIpc, EXECUTE_PLANTUML } from '../ipc';
 import IpcController from './IpcController';
 
 let win: BrowserWindow | null;
@@ -23,6 +23,7 @@ async function initialize() {
 
     registerIpc(ADD_SAMPLE_VALUE_AND_GET_COUNT, ipcController.addSampleValueAndGetCount.bind(ipcController));
     registerIpc(READ_FILE, ipcController.readFile.bind(ipcController));
+    registerIpc(EXECUTE_PLANTUML, ipcController.executePlantUml.bind(ipcController));
 }
 
 function createWindow() {
@@ -38,14 +39,3 @@ function createWindow() {
         win = null;
     });
 }
-
-import childProcess from 'child_process';
-import fs from 'fs';
-const jarPath = path.join(app.getAppPath(), 'plantuml.jar');
-console.log(jarPath);
-const cp = childProcess.spawn('java', ['-jar', jarPath, '-Djava.awt.headless=true', '-pipe']);
-cp.addListener('exit', (code, signal) => { console.log('EXIT', code, signal); });
-cp.stdin.write('@startuml\nAlice -> Bob: こんにちは\nBob --> Alice: こんにちは、こんにちは\n@enduml');
-cp.stdin.end();
-const fileStream = fs.createWriteStream('out.png');
-cp.stdout.pipe(fileStream);

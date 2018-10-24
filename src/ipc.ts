@@ -3,6 +3,7 @@ import log from 'electron-log';
 
 export const ADD_SAMPLE_VALUE_AND_GET_COUNT = 'addSampleValueAndGetCount';
 export const READ_FILE = 'readFile';
+export const EXECUTE_PLANTUML = 'executePlantUml';
 
 export const reply = (channel: string) => `${channel}-reply`;
 
