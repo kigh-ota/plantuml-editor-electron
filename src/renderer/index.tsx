@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import Button from './Button';
 import DropArea from './DropArea';
-import Title from './Title';
 import PreviewImage from './PreviewImage';
+import Title from './Title';
 
 // Disable drag & drop
 document.addEventListener('dragover', (event) => event.preventDefault());

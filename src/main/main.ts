@@ -1,7 +1,7 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
 import Initializer from '../core/Initializer';
-import { ADD_SAMPLE_VALUE_AND_GET_COUNT, READ_FILE, registerIpc, EXECUTE_PLANTUML } from '../ipc';
+import { ADD_SAMPLE_VALUE_AND_GET_COUNT, EXECUTE_PLANTUML, READ_FILE, registerIpc } from '../ipc';
 import IpcController from './IpcController';
 
 let win: BrowserWindow | null;
