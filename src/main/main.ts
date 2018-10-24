@@ -39,7 +39,13 @@ function createWindow() {
     });
 }
 
-import plantuml from 'node-plantuml';
+import childProcess from 'child_process';
 import fs from 'fs';
-const gen = plantuml.generate('input-file');
-gen.out.pipe(fs.createWriteStream('output-file.png'));
+const jarPath = path.join(app.getAppPath(), 'plantuml.jar');
+console.log(jarPath);
+const cp = childProcess.spawn('java', ['-jar', jarPath, '-Djava.awt.headless=true', '-pipe']);
+cp.addListener('exit', (code, signal) => { console.log('EXIT', code, signal); });
+cp.stdin.write('@startuml\nAlice -> Bob: こんにちは\nBob --> Alice: こんにちは、こんにちは\n@enduml');
+cp.stdin.end();
+const fileStream = fs.createWriteStream('out.png');
+cp.stdout.pipe(fileStream);
