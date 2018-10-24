@@ -1,0 +1,13 @@
+{
+  "name": "ts-electron",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "ts-electron",
+  "main": "./generated/main.js",
+  "author": {
+    "name": "Kaiichiro Ota",
+    "email": "ota.kaiichiro@gmail.com"
+  },
+  "dependencies": {
+    "sqlite3": "^4.0.2"
+  }
+}

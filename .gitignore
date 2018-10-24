@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+/dist
+/app/generated
+npm-debug.log
+.nyc_output/
+coverage/
+/cli.js
+/cli.js.map
+**/ts-electron.db

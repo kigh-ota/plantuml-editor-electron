@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  build-and-unit-test:
+    docker:
+      - image: circleci/node:8-browsers
+    working_directory: ~/ts-electron
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: sudo npm install -g npm@latest
+      - run:
+          name: Install npm packages
+          command: npm ci
+      - run:
+          name: Check code (tslint)
+          command: npm run tslint
+      - run:
+          name: Check build is successful
+          command: npm run build
+      - run:
+          name: Run unit tests
+          command: MOCHA_FILE="junit/unit-test-results.xml" npm run test:unit:ci
+      - run:
+          name: Run CLI tests
+          command: npm run test:cli
+      - store_test_results:
+          path: ~/ts-electron/junit
+      - store_artifacts:
+          path: ~/ts-electron/junit
+  package-and-integration-test:
+    docker:
+      - image: circleci/node:8-browsers
+    working_directory: ~/ts-electron
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: sudo npm install -g npm@latest
+      - run:
+          name: Install npm packages
+          command: npm ci
+      - run:
+          name: Install apt packages
+          command: sudo apt -y install icnsutils graphicsmagick
+      - run:
+          name: Package app
+          command: npm run package
+      - run:
+          name: Run integration tests
+          command: MOCHA_FILE="junit/integration-test-results.xml" npm run test:integration:ci
+      - store_test_results:
+          path: ~/ts-electron/junit
+      - store_artifacts:
+          path: ~/ts-electron/junit
+      - store_artifacts:
+          path: ~/ts-electron/dist
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build-and-unit-test
+      - package-and-integration-test:
+          requires:
+            - build-and-unit-test
+          filters:
+            branches:
+              only: master
